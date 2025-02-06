@@ -24,6 +24,35 @@ class OrderController extends Controller
         Helper::global_variables();
     } 
 
+    public function showPaymentPage($orderId)
+    {
+        $order = Order::with('products')->find($orderId);
+
+        if (!$order) {
+            return redirect()->back()->with('error', 'Pedido não encontrado.');
+        }
+
+        // Verifica se o pedido tem produtos associados
+        if ($order->products->isEmpty()) {
+            return redirect()->back()->with('error', 'Nenhum produto encontrado para este pedido.');
+        }
+
+        // Obter a lista de nomes dos produtos
+        $productNames = $order->products->pluck('name')->toArray();
+
+        return view('admin.order.payment', [
+            'order' => $order,
+            'productNames' => implode(', ', $productNames), // Junta os nomes com vírgula
+            'value' => $order->products->sum('pivot.price'), // Soma os valores dos produtos
+        ]);
+    }
+
+
+    
+
+
+
+
     public function index()
     {
         $type = Type::where('active',1)

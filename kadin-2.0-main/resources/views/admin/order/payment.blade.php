@@ -17,11 +17,13 @@
             <div class="card d-flex justify-content-center  align-items-center bg-transparent border-none">
                 <img class="card-img-top" src="{{$internal_settings['logo']->value}}" alt="Card image cap" style="width:100%; max-width: 300px">
                 <div class="card-body">
+                <p>Produtos: {{ $productNames }}</p>
                     <h5 class="card-title text-center" style="font-size: 55px; color: #A52A2A;">Valor: R$ {{number_format($value, 2, '.', '')}}</h5>
                     <button class="btn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#cancel">Cancelar pedido</button>
                 </div>
             </div>
         </div>
+
         <div class="col-sm-6 col-12">
             <div class="card" style="border-radius: 10px; width: 100%; background-color: #FF5733; margin-bottom: 5px" >
                 <div class="card-body" align="center">
